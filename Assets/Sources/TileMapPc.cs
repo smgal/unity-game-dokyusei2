@@ -19,7 +19,7 @@ public class TileMapPc : MonoBehaviour
 	MatiTilePc tile_base;
 
 	void Start()
-    {
+	{
 		tile_map_pc = GetComponent<Tilemap>();
 
 		tile_base = MatiTilePc.CreateInstance<MatiTilePc>();
@@ -28,7 +28,7 @@ public class TileMapPc : MonoBehaviour
 
 	// Update is called once per frame
 	void Update()
-    {
+	{
 		tile_map_pc.ClearAllTiles();
 
 		for (int y = -0; y <= 0; y++)

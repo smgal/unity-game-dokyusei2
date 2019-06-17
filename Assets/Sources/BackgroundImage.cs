@@ -8,7 +8,7 @@ public class BackgroundImage : MonoBehaviour
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		Texture2D texture = new Texture2D(2, 2);
 		texture.LoadImage(image_asset.bytes);
 		texture.filterMode = FilterMode.Point;

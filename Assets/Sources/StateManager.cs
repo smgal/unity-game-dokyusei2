@@ -10,14 +10,10 @@ public class StateManager : MonoBehaviour
 		ResourceManager.LoadDokyuImage();
 	}
 
-	void Start()
-    {
-	}
-
 	static int tick = 0;
 
 	void Update()
-    {
+	{
 		if (Input.GetKey(KeyCode.LeftArrow))
 			ResourceManager.yui.Move(-1, 0);
 		if (Input.GetKey(KeyCode.RightArrow))

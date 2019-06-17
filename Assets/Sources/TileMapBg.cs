@@ -21,7 +21,7 @@ public class TileMapBg : MonoBehaviour
 	MatiTileBg tile_base;
 
 	void Start()
-    {
+	{
 		tile_map_bg = GetComponent<Tilemap>();
 
 		tile_base = MatiTileBg.CreateInstance<MatiTileBg>();
@@ -29,7 +29,7 @@ public class TileMapBg : MonoBehaviour
 	}
 
 	void Update()
-    {
+	{
 		tile_map_bg.ClearAllTiles();
 		for (int y = -10; y <= 10; y++)
 		{
