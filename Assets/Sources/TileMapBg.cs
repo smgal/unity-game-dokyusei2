@@ -22,9 +22,6 @@ public class TileMapBg : MonoBehaviour
 
 	void Start()
     {
-		ResourceManager.LoadDokyuMap();
-		ResourceManager.LoadDokyuImage();
-
 		tile_map_bg = GetComponent<Tilemap>();
 
 		tile_base = MatiTileBg.CreateInstance<MatiTileBg>();

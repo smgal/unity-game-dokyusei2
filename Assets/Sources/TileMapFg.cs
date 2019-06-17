@@ -29,13 +29,6 @@ public class TileMapFg : MonoBehaviour
 
 		tile_base = MatiTileFg.CreateInstance<MatiTileFg>();
 		tile_base.sprites = ResourceManager.fg_tile_images;
-
-		Vector3Int vec3 = new Vector3Int(0, 0, 0);
-		tile_map_fg.SetTile(vec3, tile_base);
-
-		vec3.x = 2;
-		vec3.y = 1;
-		tile_map_fg.SetTile(vec3, tile_base);
 	}
 
 	void Update()

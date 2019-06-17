@@ -14,15 +14,20 @@ public class StateManager : MonoBehaviour
     {
 	}
 
+	static int tick = 0;
+
 	void Update()
     {
 		if (Input.GetKey(KeyCode.LeftArrow))
-			ResourceManager.yui.x -= 1;
+			ResourceManager.yui.Move(-1, 0);
 		if (Input.GetKey(KeyCode.RightArrow))
-			ResourceManager.yui.x += 1;
+			ResourceManager.yui.Move(+1, 0);
 		if (Input.GetKey(KeyCode.UpArrow))
-			ResourceManager.yui.y -= 1;
+			ResourceManager.yui.Move(0, -1);
 		if (Input.GetKey(KeyCode.DownArrow))
-			ResourceManager.yui.y += 1;
+			ResourceManager.yui.Move(0, +1);
+
+		if (++tick % 20 == 0)
+			ResourceManager.yui.Move();
 	}
 }
