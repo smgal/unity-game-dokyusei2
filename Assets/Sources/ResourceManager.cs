@@ -21,6 +21,12 @@ public class ResourceManager
 
 		public ushort this[int x, int y] { get { return _GetData(x, y); } }
 
+		public bool isBlocked(int x, int y)
+		{
+			int index = y * x_size + x;
+			return (index >= 0 && index < map_data.Length) ? (map_data[index] & 0x8000) > 0 : false;
+		}
+
 		private ushort _GetData(int x, int y)
 		{
 			int index = y * x_size + x;
@@ -31,8 +37,13 @@ public class ResourceManager
 	static public Yui yui = new Yui();
 	static public Map map = new Map();
 
-	static public void LoadDokyuImage(out List<Sprite> out_bg_tile_images, out List<Sprite> out_fg_tile_images)
+	static public List<Sprite> bg_tile_images;
+	static public List<Sprite> fg_tile_images;
+
+	static public void LoadDokyuImage()
 	{
+		Color TRANSPARENT_COLOR = new Color(0,0,0,0);
+
 		Color[] palette_data = new Color[16];
 
 		{
@@ -112,29 +123,30 @@ public class ResourceManager
 						ix_palette |= ((tile_data[i][ix_tile_b + index] & (0x80 >> shift)) != 0) ? 0x01 : 0U;
 
 						texture_bg.SetPixel(i * image_width + x, y, palette_data[ix_palette]);
-						//res_tile[i * image_width + x][y] = palette_data[ix_palette];
 
 						if ((tile_data[i][ix_tile_i + index] & (0x80 >> shift)) != 0)
-						{
-							//res_tile_fg[i * image_width + x][y] = palette_data[ix_palette];
-						}
+							texture_fg.SetPixel(i * image_width + x, y, palette_data[ix_palette]);
+						else
+							texture_fg.SetPixel(i * image_width + x, y, TRANSPARENT_COLOR);
 					}
 				}
 			}
 
+			Vector2 pivot = new Vector2(1.0f, 1.0f);
+
 			texture_bg.filterMode = FilterMode.Point;
 			texture_bg.Apply();
 
-			out_bg_tile_images = new List<Sprite>();
+			bg_tile_images = new List<Sprite>();
 			for (int i = 0; i < MAX_TILE; i++)
-				out_bg_tile_images.Add(Sprite.Create(texture_bg, new Rect(image_width * i, 0.0f, image_width, image_height), new Vector2(0.5f, 0.5f), 16.0f));
+				bg_tile_images.Add(Sprite.Create(texture_bg, new Rect(image_width * i, 0.0f, image_width, image_height), pivot, 16.0f));
 
 			texture_fg.filterMode = FilterMode.Point;
 			texture_fg.Apply();
 
-			out_fg_tile_images = new List<Sprite>();
+			fg_tile_images = new List<Sprite>();
 			for (int i = 0; i < MAX_TILE; i++)
-				out_fg_tile_images.Add(Sprite.Create(texture_bg, new Rect(image_width * i, 0.0f, image_width, image_height), new Vector2(0.5f, 0.5f), 16.0f));
+				fg_tile_images.Add(Sprite.Create(texture_fg, new Rect(image_width * i, 0.0f, image_width, image_height), pivot, 16.0f));
 		}
 	}
 
